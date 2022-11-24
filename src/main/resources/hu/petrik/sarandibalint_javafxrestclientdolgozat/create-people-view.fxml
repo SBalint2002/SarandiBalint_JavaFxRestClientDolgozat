@@ -29,7 +29,7 @@
         <Label text="Név:" GridPane.halignment="RIGHT" />
         <Label text="Életkor:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
         <Label text="Oltások száma:" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-      <Label text="Elkapta?" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+        <Label text="Elkapta?" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
         <TextField fx:id="nameField" GridPane.columnIndex="1" />
         <Spinner fx:id="oltasField" prefWidth="2000.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Spinner fx:id="ageField" prefWidth="2000.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />

@@ -90,11 +90,68 @@ public class ListCovidosController extends Controller{
 
     @FXML
     public void updateClick(ActionEvent actionEvent) {
-
+        int selectedIndex = peopleTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex == -1) {
+            warning("Please select a person from the list first");
+            return;
+        }
+        Person selected = peopleTable.getSelectionModel().getSelectedItem();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("update-people-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 640, 480);
+            Stage stage = new Stage();
+            stage.setTitle("Update People");
+            stage.setScene(scene);
+            UpdateCovidosController controller = fxmlLoader.getController();
+            controller.setPerson(selected);
+            stage.show();
+            insertButton.setDisable(true);
+            updateButton.setDisable(true);
+            deleteButton.setDisable(true);
+            stage.setOnHidden(event -> {
+                insertButton.setDisable(false);
+                updateButton.setDisable(false);
+                deleteButton.setDisable(false);
+                try {
+                    loadPeopleFromServer();
+                } catch (IOException e) {
+                    error("An error occurred while communicating with the server");
+                }
+            });
+        } catch (IOException e) {
+            error("Could not load form", e.getMessage());
+        }
     }
 
     @FXML
     public void deleteClick(ActionEvent actionEvent) {
+        int selectedIndex = peopleTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex == -1) {
+            warning("pls select a person from a list");
+            return;
+        }
 
+        Person selected = peopleTable.getSelectionModel().getSelectedItem();
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setHeaderText(String.format("Are you sure want to delete %s?", selected.getName()));
+        Optional<ButtonType> optionalButtonType = confirmation.showAndWait();
+        if (optionalButtonType.isEmpty()) {
+            System.out.println("Unknown error occurred");
+            return;
+        }
+        ButtonType clickButton = optionalButtonType.get();
+        if (clickButton.equals(ButtonType.OK)) {
+            String url = App.BASE_URL + "/" + selected.getId();
+            try {
+                RequestHandler.delete(url);
+            } catch (IOException e) {
+                error("An error occurred while communicating with the server");
+            }
+        }
+        try {
+            loadPeopleFromServer();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
