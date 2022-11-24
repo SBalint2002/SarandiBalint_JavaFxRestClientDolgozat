@@ -6,16 +6,12 @@ import com.google.gson.annotations.SerializedName;
 public class Person {
     private int id;
     @Expose
-    @SerializedName("Name")
     private String name;
     @Expose
-    @SerializedName("Oltas")
     private int oltas;
     @Expose
-    @SerializedName("Eletkor")
     private int age;
     @Expose
-    @SerializedName("Elkapta")
     private boolean elkapta;
 
     public Person(int id, String name, int oltas, int age, boolean elkapta) {
