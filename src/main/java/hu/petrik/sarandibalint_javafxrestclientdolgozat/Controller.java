@@ -4,13 +4,12 @@ import javafx.scene.control.Alert;
 
 public abstract class Controller {
 
-    protected void error(String headerText, String contentText){
-        alert(Alert.AlertType.WARNING, headerText, contentText);
-
-    }
-
     protected void error(String headerText){
         error(headerText, "");
+    }
+
+    protected void error(String headerText, String contentText){
+        alert(Alert.AlertType.WARNING, headerText, contentText);
     }
 
     protected void warning(String headerText) {

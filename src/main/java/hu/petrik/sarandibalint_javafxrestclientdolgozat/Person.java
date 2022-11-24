@@ -1,21 +1,29 @@
 package hu.petrik.sarandibalint_javafxrestclientdolgozat;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Person {
     private int id;
     @Expose
+    @SerializedName("Name")
     private String name;
     @Expose
-    private String email;
+    @SerializedName("Oltas")
+    private int oltas;
     @Expose
+    @SerializedName("Eletkor")
     private int age;
+    @Expose
+    @SerializedName("Elkapta")
+    private boolean elkapta;
 
-    public Person(int id, String name, String email, int age) {
+    public Person(int id, String name, int oltas, int age, boolean elkapta) {
         this.id = id;
         this.name = name;
-        this.email = email;
+        this.oltas = oltas;
         this.age = age;
+        this.elkapta = elkapta;
     }
 
     public int getId() {
@@ -34,12 +42,12 @@ public class Person {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public int getOltas() {
+        return oltas;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setOltas(int oltas) {
+        this.oltas = oltas;
     }
 
     public int getAge() {
@@ -48,5 +56,13 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public boolean isElkapta() {
+        return elkapta;
+    }
+
+    public void setElkapta(boolean elkapta) {
+        this.elkapta = elkapta;
     }
 }
